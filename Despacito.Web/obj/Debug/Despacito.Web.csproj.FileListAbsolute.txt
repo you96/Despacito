@@ -99,3 +99,5 @@ E:\Despacito\Despacito\Despacito.Web\bin\zh-Hant\System.Spatial.resources.dll
 E:\Despacito\Despacito\Despacito.Web\obj\Debug\Despacito.Web.csprojResolveAssemblyReference.cache
 E:\Despacito\Despacito\Despacito.Web\obj\Debug\Despacito.Web.dll
 E:\Despacito\Despacito\Despacito.Web\obj\Debug\Despacito.Web.pdb
+E:\Despacito\Despacito\Despacito.Web\bin\Despacito.Lib.dll
+E:\Despacito\Despacito\Despacito.Web\bin\Despacito.Lib.pdb

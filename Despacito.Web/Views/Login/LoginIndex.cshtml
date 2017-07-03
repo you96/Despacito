@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "LoginIndex";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link href="~/Content/themes/gray/easyui.css" rel="stylesheet" />
+    <style>
+        .form-error-text {
+            padding-left: 30px;
+            height: 26px;
+            color: red;
+            line-height: 25px;
+        }
+
+        .form-succeed-text {
+            padding-left: 30px;
+            height: 26px;
+            color: green;
+            line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%; height: 80px; line-height: 80px;background: rgba(236,240,241,0.2);
+                                           color: #66f; text-shadow: 2px 2px 4px #d2b48c; padding-left: 30px; font-size: 24px; font-weight: bold; letter-spacing: 0.2em; text-align: center; font-family: 微软雅黑,黑体;
+                                           position: absolute; top: 0px; left: 0px; z-index: 10">Despacito</div>
+    <div class="login-wrap">
+        <div id="divMeg" style="width: 100%; height: 25px; line-height: 25px; font-size: 14px;"></div>
+        <div class="form">
+            <input id="txtAccount" type="text" placeholder="Username" name="un" />
+            <input id="txtPassword" type="password" placeholder="Password" name="pw" />
+            <button id="btnLogin">Login</button>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/jquery.easyui-1.4.5.min.js"></script>
+    <script src="~/Scripts/login.js"></script>
+    <script src="~/Scripts/framework.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#btnLogin").click(function() {
+            UserLogin();
+        });
+    });
+    //回车键
+    document.onkeydown = function (e) {
+        if (!e) e = window.event; //火狐中是 window.event
+        if ((e.keyCode || e.which) === 13) {
+            var btnLogin = document.getElementById("btnLogin");
+            btnLogin.click();
+        }
+    }
+    function UserLogin() {
+        var account = $('#txtAccount');
+        var pwd = $('#txtPassword');
+        if (account.val() === "") {
+            formMessage("登录账号不能为空", "error");
+            account.focus();
+            return;
+        }
+        if (pwd.val() === "") {
+            formMessage('登录密码不能为空', "error");
+            pwd.focus();
+            return;
+        }
+        var postData = { account: account.val(), password: pwd.val() };
+        window.setTimeout(function() {
+            GetAjax("/Login/IndexPost", postData, function (data) {
+                if (data !== "登录成功") {
+                    formMessage(data, "error");
+                } else {
+                    formMessage("登录成功,正在跳转首页...", "succeed");
+                    setInterval(function() { window.location.href = "/Home/Index" }, 1000);
+                }
+            });
+        });
+    }
+
+//提示信息
+    function formMessage(msg, type) {
+        $('#divMeg').html('');
+        $('#divMeg').append('<div class="form-' + type + '-text">' + msg + '</div>');
+    }
+    </script>
+
+</body>
+</html>
+
